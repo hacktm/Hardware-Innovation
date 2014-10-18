@@ -1,18 +1,53 @@
 package com.example.androidhacktm;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.*;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+
+	DrawingView dv ;   
+//	private Paint       mPaint;
+//	private DrawingManager mDrawingManager=null;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	  
+	    setContentView(R.layout.activity_main);
+	    dv =(DrawingView)findViewById(R.id.dv);
+	    dv.mPaint = new Paint();
+	    dv.mPaint.setAntiAlias(true);
+	    dv.mPaint.setDither(true);
+	    dv.mPaint.setColor(Color.GREEN);
+	    dv.mPaint.setStyle(Paint.Style.STROKE);
+	    dv.mPaint.setStrokeJoin(Paint.Join.ROUND);
+	    dv.mPaint.setStrokeCap(Paint.Cap.ROUND);
+	    dv.mPaint.setStrokeWidth(12);  
+	}
+
+	
+	 
+	  
+
+	
+//	@Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//    }
 
 
     @Override
@@ -33,4 +68,6 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    
 }
