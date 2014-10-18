@@ -4,3 +4,8 @@
 
 *.snap
 .projects
+.metadata/.plugins/org.eclipse.core.resources/.projects/AndroidHackTM/.markers.snap
+.metadata/.plugins/org.eclipse.core.resources/.projects/AndroidHackTM/.syncinfo.snap
+.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+.metadata/.plugins/org.eclipse.core.resources/.snap

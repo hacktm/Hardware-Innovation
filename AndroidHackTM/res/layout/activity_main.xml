@@ -24,11 +24,27 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="18dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/bmpsend"
         android:src="@drawable/bmpsend"
         android:text="SendTrack" />
-   
+     <ImageButton
+        android:id="@+id/ibOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/bluetooth"
+        android:src="@drawable/bluetooth"
+        android:text="SendTrack" />
+   <EditText 
+        android:id="@+id/tbText"
+  	 	android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+        android:inputType="text"
+       />
   
      </RelativeLayout>
 

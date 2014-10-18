@@ -1,9 +1,11 @@
 package com.example.androidhacktm;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.*;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 
@@ -19,7 +22,8 @@ public class MainActivity extends Activity {
 
 
 	DrawingView dv ;   
-    ImageButton ibSend;
+//    ImageButton ibSend,ibOpen;
+//    EditText myTextbox;
 
 
 	@Override
@@ -35,14 +39,16 @@ public class MainActivity extends Activity {
 	    dv.mPaint.setStyle(Paint.Style.STROKE);
 	    dv.mPaint.setStrokeJoin(Paint.Join.ROUND);
 	    dv.mPaint.setStrokeCap(Paint.Cap.ROUND);
-	    dv.mPaint.setStrokeWidth(12);  
+	    dv.mPaint.setStrokeWidth(12); 
+	    
+//	    ibSend = (ImageButton)findViewById(R.id.ibSend);
+//	    ibOpen = (ImageButton)findViewById(R.id.ibOpen);
+//	    myTextbox = (EditText)findViewById(R.id.tbText);
+	    
+	   
 	}
 
 	
-	 
-	  
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
