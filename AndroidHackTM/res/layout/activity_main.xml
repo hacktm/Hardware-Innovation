@@ -17,26 +17,19 @@
     <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
-    <Button
-        android:id="@+id/button1"
+    <ImageButton
+        android:id="@+id/ibSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="18dp"
-        android:layout_marginRight="26dp"
-        android:background="@android:drawable/btn_default_small"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/bmpsend"
+        android:src="@drawable/bmpsend"
         android:text="SendTrack" />
    
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="18dp"
-        android:layout_marginLeft="26dp"
-        android:text="Refresh" />
+  
      </RelativeLayout>
 
 </FrameLayout>

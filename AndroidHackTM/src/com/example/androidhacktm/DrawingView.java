@@ -150,10 +150,10 @@ public class DrawingView extends View {
     pointsArray[i].x = (int)Math.round(x); 
     pointsArray[i].y = (int)Math.round(y); 
     i++;
-    for (int arraySize = 0; arraySize < pointsArray.length; arraySize+=2)
-	{
-    	degreesArray[arraySize] = GetAngleOfLineBetweenTwoPoints(pointsArray[arraySize],pointsArray[arraySize]);
-	}
+//    for (int arraySize = 0; arraySize < pointsArray.length; arraySize+=2)
+//	{
+//    	degreesArray[arraySize] = GetAngleOfLineBetweenTwoPoints(pointsArray[arraySize],pointsArray[arraySize]);
+//	}
     switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             amDesenat = true;

@@ -12,14 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends Activity {
 
 
 	DrawingView dv ;   
-//	private Paint       mPaint;
-//	private DrawingManager mDrawingManager=null;
+    ImageButton ibSend;
 
 
 	@Override
