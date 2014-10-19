@@ -1,6 +1,9 @@
 #include <Wire.h>
 #include <HMC5883L.h>
 
+#define trigPin 51
+#define echoPin 50
+
 #define OUT1PIN1 30     // H-bridge OUT1.1
 #define OUT1PIN2 31   // H-bridge OUT1.2
 #define ENABLE1 2    // H-bridge Ena 1
@@ -10,8 +13,8 @@
 
 HMC5883L compass;
 #define ARRAY_LENGHT 7
-int array[100]={60,90,120, 100, 75, 55, 90, 110},led=41;
-int i=1;
+int array[100]={60,90,120, 100, 75, 55, 90, 110};
+int i=1,led=41;
 float last_val;
 
 void setup()   
@@ -22,8 +25,10 @@ void setup()
   compass = HMC5883L(); //new instance of HMC5883L library
   setupHMC5883L(); //setup the HMC5883L
   
+  pinMode(trigPin, OUTPUT); //Distance sensor Trigger
+  pinMode(echoPin, INPUT);  //Distance sensor EchoPIN
   pinMode(led, OUTPUT); //LED pin
-  digitalWrite(led, LOW);
+  digitalWrite(led, LOW);  //LED-off. initialization
   pinMode(OUT1PIN1, OUTPUT);// setup Motor 1 pins
   pinMode(OUT1PIN2, OUTPUT);
   pinMode(OUT2PIN1, OUTPUT);// setup Motor 2 pins
@@ -32,6 +37,17 @@ void setup()
   pinMode(ENABLE2, OUTPUT);
   
   last_val=getAngle();    
+}
+
+void loop() // my pen is huge
+{
+  if(distance()) 
+    {
+     move();
+     digitalWrite(led, LOW);
+    }
+    else
+    halt();
 }
 
 void move()
@@ -74,13 +90,31 @@ void move()
   else
   {
     halt(); //stop robot
-    digitalWrite(led, HIGH);
-  }
+   }
 }
 
-void loop() 
+int distance()
 {
-   move();
+ long duration, distance;
+ bool flag;
+  
+  digitalWrite(trigPin, LOW);
+  digitalWrite(trigPin, HIGH);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
+    if(distance>100)
+      distance=100;
+    if(distance<1)
+      distance=1;  
+
+     if(distance<=15)
+        flag=0;
+       else
+        flag=1;
+        
+ Serial.println(distance);//debug purposes 
+ return flag;
 }
  
 void forward(int accel)
@@ -123,6 +157,7 @@ void halt()
  digitalWrite(OUT2PIN2, LOW);
  analogWrite(ENABLE1,0 );
  analogWrite(ENABLE2,0 ); 
+ digitalWrite(led, HIGH);
  }
  
 void setupHMC5883L(){
