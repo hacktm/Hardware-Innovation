@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -93,16 +94,28 @@ public class MainActivity extends Activity {
 			}
 		});
         
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-              try {
-                sendData();
-              }
-              catch (IOException ex) {
-                  showMessage("SEND FAILED");
-              }
-            }
-          });  
+//        sendButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//              try {
+//                sendData();
+//              }
+//              catch (IOException ex) {
+//                  showMessage("SEND FAILED");
+//              }
+//            }
+//          });  
+        
+        sendButton.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+//				v.startAnimation(buttonClick);
+				bluetoothService.write("B".getBytes());
+				return true;
+			}
+		});
+        
         Toast.makeText(this, "\tNOT CONNECTED!\nPlease use connect button!", Toast.LENGTH_LONG).show();
         }
 		//Open Button
