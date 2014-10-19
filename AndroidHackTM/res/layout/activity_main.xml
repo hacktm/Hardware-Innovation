@@ -45,6 +45,11 @@
 	    android:layout_height="wrap_content"
         android:inputType="text"
        />
+   <TextView 
+        android:id="@+id/state"
+  	 	android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+       />
   
      </RelativeLayout>
 

@@ -27,14 +27,8 @@ public class DrawingView extends View {
     private Paint circlePaint;
     private Path circlePath;
     boolean amDesenat;
-    double[] degreesArray = new double[50];
-    Point[] pointsArray = new Point[50];
-    {
-    for (int arraySize = 0; arraySize < pointsArray.length; arraySize++)
-    	{
-    		pointsArray[arraySize] = new Point();
-    	}
-    }
+    public static double[] degreesArray = new double[50];
+    static Point[] pointsArray = new Point[50];
    
     int counter;
     int i=0;
@@ -147,13 +141,11 @@ public class DrawingView extends View {
     public boolean onTouchEvent(MotionEvent event) {
     float x = event.getX();
     float y = event.getY();
+    pointsArray[i] = new Point();
     pointsArray[i].x = (int)Math.round(x); 
     pointsArray[i].y = (int)Math.round(y); 
     i++;
-//    for (int arraySize = 0; arraySize < pointsArray.length; arraySize+=2)
-//	{
-//    	degreesArray[arraySize] = GetAngleOfLineBetweenTwoPoints(pointsArray[arraySize],pointsArray[arraySize]);
-//	}
+
     switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             amDesenat = true;
@@ -176,6 +168,12 @@ public class DrawingView extends View {
     return true;
     } 
     
-    
-    
+    public static void SendDegrees()
+    { 
+    	for (int arraySize = 0; arraySize < pointsArray.length; arraySize++)
+		{
+    		if(pointsArray[arraySize] != null)
+    			degreesArray[arraySize] = GetAngleOfLineBetweenTwoPoints(pointsArray[arraySize],pointsArray[arraySize+1]);
+		}
+    }
     }
