@@ -9,9 +9,10 @@
 #define ENABLE2 3    // H-bridge Ena 2
 
 HMC5883L compass;
-
-int array[100]={60,63,70,50},init_val;  
-    //my penis
+#define ARRAY_LENGHT 7
+int array[100]={60,90,120, 100, 75, 55, 90, 110},led=41;
+int i=1;
+float last_val;
 
 void setup()   
 {
@@ -19,8 +20,10 @@ void setup()
   Wire.begin();
   
   compass = HMC5883L(); //new instance of HMC5883L library
-  setupHMC5883L(); //setup the HMC5883L 
+  setupHMC5883L(); //setup the HMC5883L
   
+  pinMode(led, OUTPUT); //LED pin
+  digitalWrite(led, LOW);
   pinMode(OUT1PIN1, OUTPUT);// setup Motor 1 pins
   pinMode(OUT1PIN2, OUTPUT);
   pinMode(OUT2PIN1, OUTPUT);// setup Motor 2 pins
@@ -28,46 +31,57 @@ void setup()
   pinMode(ENABLE1, OUTPUT);//pwm speed pins
   pinMode(ENABLE2, OUTPUT);
   
-  init_val=getAngle();
-    
+  last_val=getAngle();    
 }
 
-int i=1;
+void move()
+{
+  float angle_mag,angle_dir,val;
+  if(i<=ARRAY_LENGHT)
+  {
+    angle_dir=array[i-1]-array[i]; //the direction from angle from Array 
+    angle_mag = getAngle();   //angle from Magnetometer
+    val=angle_mag+angle_dir;//magn. angle + angle to take          
+    if(val>360)      //val - is value that the robto will take
+      val=val-360;
+    if(val<0)
+      val=val+360;
+    if(abs(val-last_val)<=7)
+    {
+      forward(160);
+      i++;
+      last_val = val;
+    }
+    else 
+    {
+      if (angle_mag+angle_dir > 359)
+      {
+        turn(40,250); //left
+      }
+      else if (angle_mag+angle_dir < 0)
+      {
+        turn(250,40); //right
+      }
+      else
+      {
+        if (val<last_val)
+          turn(250,40); //right
+        if(val>last_val)
+          turn(40,250); //left
+      }
+    }
+  }
+  else
+  {
+    halt(); //stop robot
+    digitalWrite(led, HIGH);
+  }
+}
 
 void loop() 
 {
-float angle_mag,angle_dir,val;
-
-angle_dir=array[i-1]-array[i]; //the direction from angle from Array 
-          Serial.println(angle_dir);
-          
-angle_mag = getAngle();   //angle from Magnetometer
-          Serial.println(angle_mag);
-          
-val=angle_mag+angle_dir;//magn. angle + angle to take          
-if(val>360)      //val - is value that the robto will take
-  val=val-360;
-if(val<0)
-  val=val+360;
-
-
-if(abs(val-angle_mag)<=5)
-  forward(180);
-else 
-  {
-    if (val>angle_mag)
-      turn(230,50); //right
-    if(val<angle_mag)
-      turn(50,230); //left
-  }
-
-
-i++;
-if(i==sizeof(array))
-  halt(); //stop robot
-
+   move();
 }
-
  
 void forward(int accel)
 {
