@@ -13,7 +13,7 @@
 
 HMC5883L compass;
 #define ARRAY_LENGHT 7
-int array[100]={60,90,120, 100, 75, 55, 90, 110};
+int array[100]={60,90,110, 100, 85, 70, 90, 110};
 int i=1,led=41;
 float last_val;
 
@@ -108,7 +108,7 @@ int distance()
     if(distance<1)
       distance=1;  
 
-     if(distance<=15)
+     if(distance<=8)
         flag=0;
        else
         flag=1;

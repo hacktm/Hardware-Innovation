@@ -1,16 +1,21 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial myBluetooth(0, 1); // RX, TX
+#define BAUD_RATE       9600
+#define rxPin            12
+#define txPin            13
+
+SoftwareSerial myBluetooth(rxPin, txPin); // RX, TX
 
 int ungle_array;
 boolean start_read = false;
 
-byte ledPin = 13;
-
 void setup()  
 {
   Serial.begin(9600);
-  myBluetooth.begin(9600);
+  Serial.println("AT");
+  pinMode(rxPin,  INPUT);
+  pinMode(txPin,  OUTPUT);
+  myBluetooth.begin(BAUD_RATE);
 }
 
 void get_data()
@@ -19,10 +24,11 @@ void get_data()
   if (myBluetooth.available() > 0)
   {
       data = (unsigned char)myBluetooth.read();
+      Serial.println(data);
       if (data == 's')
       {
         start_read = true;
-        Serial.println(data);
+        Serial.println("s sent");
       }
       else if(data == 'd')
       {
@@ -36,10 +42,12 @@ void get_data()
   else
   {
     //something wrong
+    //Serial.println("ERROR");
   }      
 }
 
 void loop() // run over and over
 {
+   //Serial.println("ERROR");
   get_data();//get data
 }
